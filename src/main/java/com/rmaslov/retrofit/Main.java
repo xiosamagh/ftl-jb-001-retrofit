@@ -205,6 +205,53 @@ public class Main {
 
 
 
+        System.out.println("Task3 - Comments example");
+        System.out.println("-----comments get ---------");
+
+        List<CommentResponse> commentsGet = api.commentsGet().execute().body();
+
+        System.out.println(commentsGet);
+
+        System.out.println("-----comment get with id ---------");
+
+        CommentResponse commentWithId = api.commentGetWithId(1).execute().body();
+
+        System.out.println(commentWithId);
+
+        System.out.println("-----comment create ---------");
+
+        CommentResponse commentCreate = api.commentCreate(CommentCreateRequest.builder()
+                        .body("body1")
+                        .postId(2)
+                        .email("email1")
+                        .name("name1")
+
+                .build()).execute().body();
+
+        System.out.println(commentCreate);
+
+        System.out.println("-----comment update ---------");
+
+        CommentResponse commentUpdate = api.commentUpdate(1, CommentUpdateRequest.builder()
+                        .id(1)
+                        .body("body2")
+                        .email("email1")
+                        .name("name1")
+                        .postId(2)
+
+
+                .build()).execute().body();
+
+        System.out.println(commentUpdate);
+
+        System.out.println("-----comment delete ---------");
+
+        Boolean commentDelete = api.commentDelete(1).execute().isSuccessful();
+
+        System.out.println(commentDelete);
+
+
+
 
 
 
