@@ -1,5 +1,6 @@
-package com.rmaslov.retrofit.response;
+package com.rmaslov.retrofit.request;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,8 +8,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AlbumResponse {
-    private Integer userId;
+@Builder
+public class AlbumUpdateRequest {
     private Integer id;
+    private Integer userId;
     private String title;
+
 }

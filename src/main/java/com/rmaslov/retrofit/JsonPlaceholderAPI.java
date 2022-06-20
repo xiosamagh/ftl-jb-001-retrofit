@@ -1,5 +1,7 @@
 package com.rmaslov.retrofit;
 
+import com.rmaslov.retrofit.request.AlbumCreateRequest;
+import com.rmaslov.retrofit.request.AlbumUpdateRequest;
 import com.rmaslov.retrofit.request.PostCreateRequest;
 import com.rmaslov.retrofit.request.PostUpdateRequest;
 import com.rmaslov.retrofit.response.*;
@@ -33,10 +35,33 @@ public interface JsonPlaceholderAPI {
     Call<List<UserResponse>> users();
 
     @GET("/users/{id}/albums")
-    Call<List<AlbumResponse>> albums(@Path("id") Integer id);
+    Call<List<AlbumResponse>> albumsWithUserId(@Path("id") Integer id);
 
     @GET("/users/{id}/todos")
     Call<List<TodosResponse>> todos(@Path("id") Integer id);
+
+    @GET("/albums")
+    Call<List<AlbumResponse>> albums();
+
+    @GET("/albums/{id}")
+    Call<AlbumResponse> albumsWithId(@Path("id") Integer id);
+
+    @POST("/albums")
+    Call<AlbumResponse> albumCreate(@Body AlbumCreateRequest request);
+
+    @PUT("/albums/{id}")
+    Call<AlbumResponse> albumUpdate(@Path ("id") Integer id, @Body AlbumUpdateRequest request);
+
+    @DELETE("/albums/{id}")
+    Call<Void> deleteAlbum(@Path ("id") Integer id);
+
+
+
+
+
+
+
+
 
 
 

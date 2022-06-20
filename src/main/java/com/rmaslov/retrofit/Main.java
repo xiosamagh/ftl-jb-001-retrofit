@@ -1,5 +1,7 @@
 package com.rmaslov.retrofit;
 
+import com.rmaslov.retrofit.request.AlbumCreateRequest;
+import com.rmaslov.retrofit.request.AlbumUpdateRequest;
 import com.rmaslov.retrofit.request.PostCreateRequest;
 import com.rmaslov.retrofit.request.PostUpdateRequest;
 import com.rmaslov.retrofit.response.*;
@@ -64,7 +66,7 @@ public class Main {
         System.out.println(users);
 
         System.out.println("-------------- Albums ------------");
-        List<AlbumResponse> albums  = api.albums(5).execute().body();
+        List<AlbumResponse> albums  = api.albumsWithUserId(5).execute().body();
 
         System.out.println(albums);
 
@@ -106,6 +108,53 @@ public class Main {
         }
 
         System.out.println("passed");
+
+
+        System.out.println("Task1 - Albums example");
+        System.out.println("-----albums get ---------");
+
+        List<AlbumResponse> albumsGet = api.albums().execute().body();
+
+        System.out.println(albumsGet);
+
+        System.out.println("-----albums get with id ---------");
+
+        AlbumResponse albumsGetWithId = api.albumsWithId(2).execute().body();
+
+        System.out.println(albumsGetWithId);
+
+        System.out.println("-----albums create ---------");
+
+        AlbumResponse albumNew = api.albumCreate(AlbumCreateRequest.builder()
+                        .title("album1")
+                        .userId(100)
+
+                .build()).execute().body();
+
+        System.out.println(albumNew);
+
+        System.out.println("-----albums update ---------");
+
+        AlbumResponse albumUpdate = api.albumUpdate(100, AlbumUpdateRequest.builder()
+                        .id(100)
+                .title("album111")
+                .userId(100)
+
+                .build()).execute().body();
+
+        System.out.println(albumUpdate);
+
+        System.out.println("-----album delete ---------");
+
+        Boolean albumDelete = api.albums().execute().isSuccessful();
+
+        System.out.println(albumDelete);
+
+
+
+
+
+
 
 
 
