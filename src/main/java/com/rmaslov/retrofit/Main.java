@@ -1,9 +1,6 @@
 package com.rmaslov.retrofit;
 
-import com.rmaslov.retrofit.request.AlbumCreateRequest;
-import com.rmaslov.retrofit.request.AlbumUpdateRequest;
-import com.rmaslov.retrofit.request.PostCreateRequest;
-import com.rmaslov.retrofit.request.PostUpdateRequest;
+import com.rmaslov.retrofit.request.*;
 import com.rmaslov.retrofit.response.*;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -146,12 +143,65 @@ public class Main {
 
         System.out.println("-----album delete ---------");
 
-        Boolean albumDelete = api.albums().execute().isSuccessful();
+        Boolean albumDelete = api.deleteAlbum(2).execute().isSuccessful();
 
         System.out.println(albumDelete);
 
 
 
+        System.out.println("Task2 - Users example");
+        System.out.println("-----users get ---------");
+
+        List<UserResponse> usersGet = api.users().execute().body();
+
+        System.out.println(usersGet);
+
+        System.out.println("-----user get with id ---------");
+
+        UserResponse userGetWithId = api.userWithId(2).execute().body();
+
+        System.out.println(userGetWithId);
+
+        System.out.println("-----user create ---------");
+
+        UserResponse userNew = api.userCreate(UserCreateRequest.builder()
+                        .address(UserCreateRequest.Address.builder().city("city1").suite("suite1").street("street1").zipcode("zipcode1").geo(UserCreateRequest.Geo.builder().lat("lat1").lng("lng1").build()).build())
+                        .company(UserCreateRequest.Company.builder().bs("bs1").catchPhrase("catchPhrase1").name("name1").build())
+                        .email("email1")
+                        .username("username1")
+                        .name("name1")
+                        .phone("phone1")
+                        .website("website1")
+
+
+
+                .build()).execute().body();
+
+        System.out.println(userNew);
+
+        System.out.println("-----user update ---------");
+
+        UserResponse userUpdate = api.userUpdate(2, UserUpdateRequest.builder()
+                        .id(2)
+                .address(UserUpdateRequest.Address.builder().city("city2").suite("suite1").street("street1").zipcode("zipcode1").geo(UserUpdateRequest.Geo.builder().lat("lat1").lng("lng1").build()).build())
+                .company(UserUpdateRequest.Company.builder().bs("bs2").catchPhrase("catchPhrase1").name("name1").build())
+                .email("email1")
+                .username("username1")
+                .name("name1")
+                .phone("phone2")
+                .website("website2")
+
+
+
+                .build()).execute().body();
+
+        System.out.println(userUpdate);
+
+        System.out.println("-----user delete ---------");
+
+        Boolean userDelete = api.userDelete(1).execute().isSuccessful();
+
+        System.out.println(userDelete);
 
 
 

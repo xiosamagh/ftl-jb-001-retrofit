@@ -1,9 +1,6 @@
 package com.rmaslov.retrofit;
 
-import com.rmaslov.retrofit.request.AlbumCreateRequest;
-import com.rmaslov.retrofit.request.AlbumUpdateRequest;
-import com.rmaslov.retrofit.request.PostCreateRequest;
-import com.rmaslov.retrofit.request.PostUpdateRequest;
+import com.rmaslov.retrofit.request.*;
 import com.rmaslov.retrofit.response.*;
 import lombok.experimental.Delegate;
 import retrofit2.Call;
@@ -31,8 +28,7 @@ public interface JsonPlaceholderAPI {
     @GET("/posts/{id}/comments")
     Call<List<CommentResponse>> postComments(@Path ("id") Integer id);
 
-    @GET("/users")
-    Call<List<UserResponse>> users();
+
 
     @GET("/users/{id}/albums")
     Call<List<AlbumResponse>> albumsWithUserId(@Path("id") Integer id);
@@ -54,6 +50,27 @@ public interface JsonPlaceholderAPI {
 
     @DELETE("/albums/{id}")
     Call<Void> deleteAlbum(@Path ("id") Integer id);
+
+
+
+    @GET("/users")
+    Call<List<UserResponse>> users();
+
+    @GET("/users/{id}")
+    Call<UserResponse> userWithId(@Path("id") Integer id);
+
+    @POST("/users")
+    Call<UserResponse> userCreate(@Body UserCreateRequest request);
+
+    @PUT("/users/{id}")
+    Call<UserResponse> userUpdate(@Path("id") Integer id, @Body UserUpdateRequest request);
+
+    @DELETE("/users/{id}")
+    Call<Void> userDelete(@Path("id") Integer id);
+
+
+
+
 
 
 
